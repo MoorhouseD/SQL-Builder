@@ -9,6 +9,7 @@ namespace SQL_Creator
     {
         private string _columnName;
         private string _columnType;
+        private string _colDefaultVal;
 
         public string columnName
         {
@@ -31,6 +32,18 @@ namespace SQL_Creator
             set
             {
                 _columnType = value;
+            }
+        }
+
+        public string columnDefaultVal
+        {
+            get
+            {
+                return _colDefaultVal;
+            }
+            set
+            {
+                _colDefaultVal = value;
             }
         }
 

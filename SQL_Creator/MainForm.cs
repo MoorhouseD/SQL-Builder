@@ -24,6 +24,12 @@ namespace SQL_Creator
 
         private void resetBtn_Click(object sender, EventArgs e)
         {
+            Reset();
+        }
+
+        private void Reset()
+        {
+            findText.Text = "";
             insertText.Text = "";
             updateText.Text = "";
             deleteText.Text = "";
@@ -67,6 +73,8 @@ namespace SQL_Creator
 
             if(tablesComboBox.SelectedText != null)
             {
+                Reset();
+
                 List<string> columns = DatabaseHandler.OrganiseColumns(tablesComboBox.SelectedItem.ToString());
                 List<Column> cols = new List<Column>();
  
@@ -78,15 +86,25 @@ namespace SQL_Creator
 
                     c.columnName = splitColData[0];
                     c.columnType = splitColData[1];
+                    c.columnDefaultVal = splitColData[2];
 
                     cols.Add(c);
                 }
+
+                //Make Update
+                updateText.Text = VisualBasic.MakeUpdate(tablesComboBox.SelectedItem.ToString(), cols);
 
                 //Make Properties
                 for(int i = 0; i < cols.Count(); ++i)
                 {
                     privateVarsText.Text += VisualBasic.MakeProperty(cols[i].columnName, cols[i].columnType);
                 }
+
+                //Make Delete
+                deleteText.Text = VisualBasic.MakeDelete(tablesComboBox.SelectedItem.ToString(), cols[0].columnName);
+
+                //Make Find
+                VisualBasic.MakeFind(tablesComboBox.SelectedItem.ToString(), cols[3].columnName, cols[3].columnDefaultVal);
 
 
             }

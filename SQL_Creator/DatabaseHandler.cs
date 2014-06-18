@@ -11,7 +11,7 @@ namespace SQL_Creator
     {
         private static string _connectionString = string.Empty;
         private static string _getTablesQuery = "SELECT name FROM sys.tables";
-        private static string _getColumnInfo = "SELECT COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ";
+        private static string _getColumnInfo = "SELECT COLUMN_NAME, DATA_TYPE, COLUMN_DEFAULT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ";
         
         public static bool SetConnectionString(string connectionString)
         {
