@@ -201,7 +201,7 @@ namespace SQL_Creator
             string delete = "Public Sub Delete()" + nl +
                             tab + "Dim objConnection As New SqlConnection(sConnectionString)" + nl +
                             tab + "objConnection.Open()" + nl +
-                            tab + "Dim objCommand As New SqlCommand('DELETE FROM " + table + " WHERE " + name + " = @" + name + "',objConnection)" + nl +
+                            tab + "Dim objCommand As New SqlCommand(\"DELETE FROM " + table + " WHERE " + name + " = @" + name + "\",objConnection)" + nl +
                             tab + "objCommand.Parameters.AddWithValue('@" + name + "', " + prefixName + ")" + nl +
                             tab + "objCommand.ExecuteNonQuery()" + nl +
                             tab + "objConnection.Close()" + nl +
