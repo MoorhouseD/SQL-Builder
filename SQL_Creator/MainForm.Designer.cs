@@ -38,6 +38,8 @@
             this.vBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.findTab = new System.Windows.Forms.TabPage();
+            this.findText = new System.Windows.Forms.TextBox();
             this.insertTab = new System.Windows.Forms.TabPage();
             this.insertText = new System.Windows.Forms.TextBox();
             this.updateTab = new System.Windows.Forms.TabPage();
@@ -60,16 +62,14 @@
             this.passwordText = new System.Windows.Forms.TextBox();
             this.usernameText = new System.Windows.Forms.TextBox();
             this.serverNameText = new System.Windows.Forms.TextBox();
-            this.findTab = new System.Windows.Forms.TabPage();
-            this.findText = new System.Windows.Forms.TextBox();
             this.mainMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.findTab.SuspendLayout();
             this.insertTab.SuspendLayout();
             this.updateTab.SuspendLayout();
             this.deleteTab.SuspendLayout();
             this.privateVarsTab.SuspendLayout();
             this.settingsGroup.SuspendLayout();
-            this.findTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -158,6 +158,29 @@
             this.tabControl1.Size = new System.Drawing.Size(648, 556);
             this.tabControl1.TabIndex = 2;
             // 
+            // findTab
+            // 
+            this.findTab.Controls.Add(this.findText);
+            this.findTab.Location = new System.Drawing.Point(4, 22);
+            this.findTab.Name = "findTab";
+            this.findTab.Padding = new System.Windows.Forms.Padding(3);
+            this.findTab.Size = new System.Drawing.Size(640, 530);
+            this.findTab.TabIndex = 4;
+            this.findTab.Text = "Find";
+            this.findTab.UseVisualStyleBackColor = true;
+            // 
+            // findText
+            // 
+            this.findText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.findText.Location = new System.Drawing.Point(9, 9);
+            this.findText.Multiline = true;
+            this.findText.Name = "findText";
+            this.findText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.findText.Size = new System.Drawing.Size(623, 513);
+            this.findText.TabIndex = 2;
+            // 
             // insertTab
             // 
             this.insertTab.Controls.Add(this.insertText);
@@ -171,6 +194,9 @@
             // 
             // insertText
             // 
+            this.insertText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.insertText.Location = new System.Drawing.Point(9, 9);
             this.insertText.Multiline = true;
             this.insertText.Name = "insertText";
@@ -191,6 +217,9 @@
             // 
             // updateText
             // 
+            this.updateText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.updateText.Location = new System.Drawing.Point(9, 9);
             this.updateText.Multiline = true;
             this.updateText.Name = "updateText";
@@ -211,6 +240,9 @@
             // 
             // deleteText
             // 
+            this.deleteText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.deleteText.Location = new System.Drawing.Point(9, 9);
             this.deleteText.Multiline = true;
             this.deleteText.Name = "deleteText";
@@ -231,6 +263,9 @@
             // 
             // privateVarsText
             // 
+            this.privateVarsText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.privateVarsText.Location = new System.Drawing.Point(8, 7);
             this.privateVarsText.Multiline = true;
             this.privateVarsText.Name = "privateVarsText";
@@ -375,26 +410,6 @@
             this.serverNameText.TabIndex = 0;
             this.serverNameText.Text = "fm7ohm9oxy";
             // 
-            // findTab
-            // 
-            this.findTab.Controls.Add(this.findText);
-            this.findTab.Location = new System.Drawing.Point(4, 22);
-            this.findTab.Name = "findTab";
-            this.findTab.Padding = new System.Windows.Forms.Padding(3);
-            this.findTab.Size = new System.Drawing.Size(640, 530);
-            this.findTab.TabIndex = 4;
-            this.findTab.Text = "Find";
-            this.findTab.UseVisualStyleBackColor = true;
-            // 
-            // findText
-            // 
-            this.findText.Location = new System.Drawing.Point(9, 9);
-            this.findText.Multiline = true;
-            this.findText.Name = "findText";
-            this.findText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.findText.Size = new System.Drawing.Size(623, 513);
-            this.findText.TabIndex = 2;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -410,6 +425,8 @@
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.findTab.ResumeLayout(false);
+            this.findTab.PerformLayout();
             this.insertTab.ResumeLayout(false);
             this.insertTab.PerformLayout();
             this.updateTab.ResumeLayout(false);
@@ -420,8 +437,6 @@
             this.privateVarsTab.PerformLayout();
             this.settingsGroup.ResumeLayout(false);
             this.settingsGroup.PerformLayout();
-            this.findTab.ResumeLayout(false);
-            this.findTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

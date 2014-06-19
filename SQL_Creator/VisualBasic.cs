@@ -32,7 +32,7 @@ namespace SQL_Creator
 
             string n = Utilities.CapitaliseFirst(name);
 
-            string prefixed = usePrefixOnPrivate ? prefix + name : name;
+            string prefixed = usePrefixOnPrivate ? prefix + n : n;
 
             result[0] = n;
             result[1] = prefixed;
@@ -80,6 +80,73 @@ namespace SQL_Creator
             return prefixName;
         }
 
+        public static string MakeCreate(string table, List<Column> cols)
+        {
+            string create;
+
+            create = "Public Function Create() As Integer" + nl +
+                        tab + "Dim objConnection As New SqlConnection(sConnectionString)" + nl +
+                        tab + "objConnection.Open()" + nl +
+                        tab + "Dim objCommand As New SqlCommand(\"INSERT INTO " + table + " ";
+
+            //Build fields and values
+            string fields = "(";
+            string values = "\" _" + nl + tab + tab + "& \"VALUES (";
+
+            for (int i = 1; i < cols.Count(); ++i)
+            {
+                if (i != cols.Count() - 1)
+                {
+                    fields += Utilities.CapitaliseFirst(cols[i].columnName) + ", ";
+                    values += "@" + Utilities.CapitaliseFirst(cols[i].columnName) + ", ";
+                }
+                else
+                {
+                    fields += Utilities.CapitaliseFirst(cols[i].columnName) + ") ";
+                    values += "@" + Utilities.CapitaliseFirst(cols[i].columnName) + ") ";
+                }
+            }
+
+            //Add fields and values
+            create += fields + values + "\", objConnection)" + nl + nl;
+
+            //Build Parameters
+            string parameterHolder = "";
+
+            for(int i = 1; i < cols.Count(); ++i)
+            {
+                string[] names = HandleName(cols[i].columnName);
+
+                string capitalisedName = names[0];
+                string prefixName = names[1];
+
+                if(capitalisedName.ToUpper() == "CUSTOMERREF")
+                {
+                    parameterHolder += tab + "objCommand.Parameters.AddWithValue(\"@" + capitalisedName + "\", GetNextCustomerNumber.RecordNum)" + nl;
+                }
+                else
+                {
+                    parameterHolder += tab + "objCommand.Parameters.AddWithValue(\"@" + capitalisedName + "\", " + prefixName + ")" + nl;
+                }
+
+            }
+
+            //Add parameters
+            create += parameterHolder;
+
+            create += tab + "objCommand.ExecuteNonQuery()" + nl +
+                        tab + "objCommand.Parameters.Clear()" + nl +
+                        tab + "objCommand.CommandText = \"SELECT @@IDENTITY\"" + nl +
+                        tab + "Dim intNewKeyRefID As Integer = Convert.ToInt32(objCommand.ExecuteScalar())" + nl +
+                        tab + "objConnection.Close()" + nl +
+                        tab + prefix + Utilities.CapitaliseFirst(cols[0].columnName) + " = intNewKeyRefID" + nl +
+                        tab + "Return intNewKeyRefID" + nl +
+                        "End Function";
+
+            return create;
+
+        }
+
         public static string MakeUpdate(string table, List<Column> cols)
         {
             string prefixKeyRef;
@@ -96,13 +163,13 @@ namespace SQL_Creator
                         tab + "If " + prefixKeyRef + "= 0 Then Throw New Exception(\"Record does not exist in table.\")" + nl +
                         tab + "Dim objConnection As New SqlConnection(sConnectionString)" + nl +
                         tab + "objConnection.Open()" + nl +
-                        tab + "Dim objCommand As New SqlCommand(\"Update " + table + "SET ";
+                        tab + "Dim objCommand As New SqlCommand(\"Update " + table + " SET ";
 
             for (int i = 0; i < cols.Count(); ++i)
             {
                 string capitalisedName = Utilities.CapitaliseFirst(cols[i].columnName);
 
-                parameterHolder += tab + "objCommand.Parameters.AddWithValue(\"@" + capitalisedName + "\", " + prefix + capitalisedName + nl;
+                parameterHolder += tab + "objCommand.Parameters.AddWithValue(\"@" + capitalisedName + "\", " + prefix + capitalisedName + ")" + nl;
 
                 if (i != cols.Count() - 1)
                     update += capitalisedName + " = @" + capitalisedName + ", ";

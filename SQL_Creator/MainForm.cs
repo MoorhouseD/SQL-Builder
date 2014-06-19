@@ -65,12 +65,6 @@ namespace SQL_Creator
 
         private void buildBtn_Click(object sender, EventArgs e)
         {
-            string findOutput;
-            string insertOutput;
-            string updateOutput;
-            string deleteOutput;
-            string propertiesOutput;
-
             if(tablesComboBox.SelectedText != null)
             {
                 Reset();
@@ -106,7 +100,8 @@ namespace SQL_Creator
                 //Make Find
                 VisualBasic.MakeFind(tablesComboBox.SelectedItem.ToString(), cols[3].columnName, cols[3].columnDefaultVal);
 
-
+                //Make Create
+                insertText.Text = VisualBasic.MakeCreate(tablesComboBox.SelectedItem.ToString(), cols);
             }
         }
 
