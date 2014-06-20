@@ -8,6 +8,7 @@ namespace SQL_Creator
 {
     internal static class VisualBasic
     {
+        private static string regexBracketMatch = @"[(](?!\))|(?<!\()[)]"; //Matches a ( or ) but not when they're together, e.g. date() won't match but (' ') will
         private static string tab = "\t";
         private static string nl = "\r\n";
 
@@ -121,20 +122,52 @@ namespace SQL_Creator
             return property;
         }
 
-        public static string MakeFind(string table, string name, string defaultValue)
+        public static string MakeConnectionString(string settingsStringName)
         {
-            string[] names = HandleName(name);
+            if (settingsStringName != null && settingsStringName.Trim().Length > 0)
+                return "Private sConnectionString = My.Settings." + settingsStringName + " `Get ConnectionString from My.Settings";
+            else
+                return "";
+        }
 
-            name = names[0];
-            string prefixName = names[1];
-            string regexBracketMatch = @"[(](?!\))|(?<!\()[)]"; //Matches a ( or ) but not when they're together, e.g. date() won't match but (' ') will
+        public static string MakeFind(string table, List<Column> cols)
+        {
 
+            string find = "";
 
-            string defaultVal = defaultValue != null && defaultValue.Trim().Length > 0 ? Regex.Replace(defaultValue, regexBracketMatch, "") : "";
+            //Build method start
+            find += "Public Sub New(ByVal KeyRef As Integer)" + nl + nl +
+                    tab + "InitializeComponent()" + nl + nl +
+                    tab + "Dim objConnection As New SqlConnection(sConnectionString)" + nl +
+                    tab + "objConnection.Open()" + nl + nl +
+                    tab + "Dim objCommand As New SqlCommand(\"SELECT * FROM " + table + " WHERE KeyRef = @KeyRef\", objConnection)" + nl +
+                    tab + "objCommand.Parameters.AddWithValue(\"@KeyRef\", Keyref)" + nl +
+                    tab + "Dim objReader As SqlDataReader = objCommand.ExecuteReader()" + nl +
+                    tab + "If objReader.Read() Then" + nl;
 
+            //Build Parameters
+            string parameters = "";
 
+            for(int i = 0; i < cols.Count(); ++i)
+            {
+                string[] names = HandleName(cols[i].columnName);
+                string prefixName = names[1];
 
-            return prefixName;
+                string defaultItem = names[1].ToLower() == "keyref" ? "0" : GetDefault(cols[i].columnType);
+
+                parameters += tab + tab + prefixName + " = IIf(IsDBNull(objReader.Item(" + i + ")), " + defaultItem + ", objReader.Item(" + i + "))" + nl;
+            }
+
+            find += parameters;
+
+            find += tab + "Else" + nl +
+                    tab + tab + "PopulateDefault()" + nl +
+                    tab + "End If" + nl +
+                    tab + "objReader.Close()" + nl +
+                    tab + "objConnection.Close()" + nl + nl +
+                    "End Sub";
+
+            return find;
         }
 
         public static string MakeCreate(string table, List<Column> cols)

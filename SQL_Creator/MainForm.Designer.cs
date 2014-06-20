@@ -48,7 +48,11 @@
             this.deleteText = new System.Windows.Forms.TextBox();
             this.privateVarsTab = new System.Windows.Forms.TabPage();
             this.privateVarsText = new System.Windows.Forms.TextBox();
+            this.defaultsTab = new System.Windows.Forms.TabPage();
+            this.defaultText = new System.Windows.Forms.TextBox();
             this.settingsGroup = new System.Windows.Forms.GroupBox();
+            this.settingsConnectionStringTest = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.connectBtn = new System.Windows.Forms.Button();
             this.tablesComboBox = new System.Windows.Forms.ComboBox();
             this.resetBtn = new System.Windows.Forms.Button();
@@ -62,8 +66,6 @@
             this.passwordText = new System.Windows.Forms.TextBox();
             this.usernameText = new System.Windows.Forms.TextBox();
             this.serverNameText = new System.Windows.Forms.TextBox();
-            this.defaultsTab = new System.Windows.Forms.TabPage();
-            this.defaultText = new System.Windows.Forms.TextBox();
             this.mainMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.findTab.SuspendLayout();
@@ -71,8 +73,8 @@
             this.updateTab.SuspendLayout();
             this.deleteTab.SuspendLayout();
             this.privateVarsTab.SuspendLayout();
-            this.settingsGroup.SuspendLayout();
             this.defaultsTab.SuspendLayout();
+            this.settingsGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -99,13 +101,13 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -120,7 +122,7 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -139,14 +141,14 @@
             this.vBToolStripMenuItem.CheckOnClick = true;
             this.vBToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.vBToolStripMenuItem.Name = "vBToolStripMenuItem";
-            this.vBToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vBToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.vBToolStripMenuItem.Text = "Visual Basic";
             // 
             // cToolStripMenuItem
             // 
             this.cToolStripMenuItem.CheckOnClick = true;
             this.cToolStripMenuItem.Name = "cToolStripMenuItem";
-            this.cToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.cToolStripMenuItem.Text = "C#";
             // 
             // tabControl1
@@ -278,8 +280,33 @@
             this.privateVarsText.Size = new System.Drawing.Size(623, 513);
             this.privateVarsText.TabIndex = 0;
             // 
+            // defaultsTab
+            // 
+            this.defaultsTab.Controls.Add(this.defaultText);
+            this.defaultsTab.Location = new System.Drawing.Point(4, 22);
+            this.defaultsTab.Name = "defaultsTab";
+            this.defaultsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.defaultsTab.Size = new System.Drawing.Size(640, 530);
+            this.defaultsTab.TabIndex = 5;
+            this.defaultsTab.Text = "Default Values";
+            this.defaultsTab.UseVisualStyleBackColor = true;
+            // 
+            // defaultText
+            // 
+            this.defaultText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.defaultText.Location = new System.Drawing.Point(9, 9);
+            this.defaultText.Multiline = true;
+            this.defaultText.Name = "defaultText";
+            this.defaultText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.defaultText.Size = new System.Drawing.Size(623, 513);
+            this.defaultText.TabIndex = 1;
+            // 
             // settingsGroup
             // 
+            this.settingsGroup.Controls.Add(this.settingsConnectionStringTest);
+            this.settingsGroup.Controls.Add(this.label6);
             this.settingsGroup.Controls.Add(this.connectBtn);
             this.settingsGroup.Controls.Add(this.tablesComboBox);
             this.settingsGroup.Controls.Add(this.resetBtn);
@@ -300,6 +327,22 @@
             this.settingsGroup.TabStop = false;
             this.settingsGroup.Text = "Settings";
             // 
+            // settingsConnectionStringTest
+            // 
+            this.settingsConnectionStringTest.Location = new System.Drawing.Point(42, 382);
+            this.settingsConnectionStringTest.Name = "settingsConnectionStringTest";
+            this.settingsConnectionStringTest.Size = new System.Drawing.Size(368, 20);
+            this.settingsConnectionStringTest.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(39, 366);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(163, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Settings Connection String Name";
+            // 
             // connectBtn
             // 
             this.connectBtn.Location = new System.Drawing.Point(248, 222);
@@ -313,7 +356,7 @@
             // tablesComboBox
             // 
             this.tablesComboBox.FormattingEnabled = true;
-            this.tablesComboBox.Location = new System.Drawing.Point(135, 367);
+            this.tablesComboBox.Location = new System.Drawing.Point(135, 313);
             this.tablesComboBox.Name = "tablesComboBox";
             this.tablesComboBox.Size = new System.Drawing.Size(275, 21);
             this.tablesComboBox.TabIndex = 12;
@@ -341,7 +384,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(35, 370);
+            this.label5.Location = new System.Drawing.Point(39, 316);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 9;
@@ -412,29 +455,6 @@
             this.serverNameText.Size = new System.Drawing.Size(275, 20);
             this.serverNameText.TabIndex = 0;
             // 
-            // defaultsTab
-            // 
-            this.defaultsTab.Controls.Add(this.defaultText);
-            this.defaultsTab.Location = new System.Drawing.Point(4, 22);
-            this.defaultsTab.Name = "defaultsTab";
-            this.defaultsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.defaultsTab.Size = new System.Drawing.Size(640, 530);
-            this.defaultsTab.TabIndex = 5;
-            this.defaultsTab.Text = "Default Values";
-            this.defaultsTab.UseVisualStyleBackColor = true;
-            // 
-            // defaultText
-            // 
-            this.defaultText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.defaultText.Location = new System.Drawing.Point(9, 9);
-            this.defaultText.Multiline = true;
-            this.defaultText.Name = "defaultText";
-            this.defaultText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.defaultText.Size = new System.Drawing.Size(623, 513);
-            this.defaultText.TabIndex = 1;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,6 +465,7 @@
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
             this.Name = "MainForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SQL Builder";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -461,10 +482,10 @@
             this.deleteTab.PerformLayout();
             this.privateVarsTab.ResumeLayout(false);
             this.privateVarsTab.PerformLayout();
-            this.settingsGroup.ResumeLayout(false);
-            this.settingsGroup.PerformLayout();
             this.defaultsTab.ResumeLayout(false);
             this.defaultsTab.PerformLayout();
+            this.settingsGroup.ResumeLayout(false);
+            this.settingsGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -508,6 +529,8 @@
         private System.Windows.Forms.TextBox findText;
         private System.Windows.Forms.TabPage defaultsTab;
         private System.Windows.Forms.TextBox defaultText;
+        private System.Windows.Forms.TextBox settingsConnectionStringTest;
+        private System.Windows.Forms.Label label6;
     }
 }
 

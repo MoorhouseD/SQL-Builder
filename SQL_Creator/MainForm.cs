@@ -43,6 +43,12 @@ namespace SQL_Creator
             string password = passwordText.Text;
             string dbName = dbText.Text;
 
+            if(serverName.Trim().Length < 1 || username.Trim().Length < 1 || dbName.Trim().Length < 1)
+            {
+                MessageBox.Show("Cannot connect to database, ensure all details have been entered and try again.", "Connection Error");
+                return;
+            }
+
             string azureConnectionString = new SqlConnectionStringBuilder
             {
                 DataSource = serverName + ".database.windows.net",
@@ -101,11 +107,13 @@ namespace SQL_Creator
                     privateVarsText.Text += VisualBasic.MakeProperty(cols[i].columnName, cols[i].columnType);
                 }
 
+                privateVarsText.Text += VisualBasic.MakeConnectionString(settingsConnectionStringTest.Text);
+
                 //Make Delete
                 deleteText.Text = VisualBasic.MakeDelete(tablesComboBox.SelectedItem.ToString(), cols[0].columnName);
 
                 //Make Find
-                VisualBasic.MakeFind(tablesComboBox.SelectedItem.ToString(), cols[3].columnName, cols[3].columnDefaultVal);
+                findText.Text = VisualBasic.MakeFind(tablesComboBox.SelectedItem.ToString(), cols);
 
                 //Make Create
                 insertText.Text = VisualBasic.MakeCreate(tablesComboBox.SelectedItem.ToString(), cols);
