@@ -26,6 +26,36 @@ namespace SQL_Creator
             { "NULL", "As Null"}
         };
 
+        private static string GetDefault(string type)
+        {
+            string def = "";
+
+            switch(type.ToUpper())
+            {
+                case "INT":
+                    def = "0";
+                    break;
+                case "BIT":
+                    def = "0";
+                    break;
+                case "SMALLMONEY":
+                    def = "0.00";
+                    break;
+                case "DATE":
+                case "DATETIME":
+                    def = "Now()";
+                    break;
+                case "NCHAR":
+                case "VARCHAR":
+                default:
+                    def = "\"\"";
+                    break;
+                    
+            }
+
+            return def;
+        }
+
         public static string[] HandleName(string name)
         {
             string[] result = new string[2];
@@ -38,6 +68,33 @@ namespace SQL_Creator
             result[1] = prefixed;
 
             return result;
+        }
+
+        public static string MakeDefaults(List<Column> cols)
+        {
+            string defaults = "Private Sub PopulateDefault()" + nl;
+
+            for(int i = 0; i < cols.Count(); ++i)
+            {
+                if(usePrefixOnPrivate)
+                {
+                    string capitalName = Utilities.CapitaliseFirst(cols[i].columnName);
+                    string defaultVal = GetDefault(cols[i].columnType);
+
+                    defaults += tab + prefix + Utilities.CapitaliseFirst(cols[i].columnName) + " = " + defaultVal + nl;
+                }
+            }
+
+            defaults += "End Sub" + nl;
+
+            defaults += "Public Sub New()" + nl + nl +
+                        tab + "` This call is required by the Windows Form Designer." + nl +
+                        tab + "InitializeComponent()" + nl + nl +
+                        tab + "` Add any initialization after the InitializeComponent() call." + nl +
+                        tab + "PopulateDefault()" + nl +
+                        "End Sub";
+
+            return defaults;
         }
 
         public static string MakeProperty(string name, string type)

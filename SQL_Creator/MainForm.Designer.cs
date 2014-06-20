@@ -62,6 +62,8 @@
             this.passwordText = new System.Windows.Forms.TextBox();
             this.usernameText = new System.Windows.Forms.TextBox();
             this.serverNameText = new System.Windows.Forms.TextBox();
+            this.defaultsTab = new System.Windows.Forms.TabPage();
+            this.defaultText = new System.Windows.Forms.TextBox();
             this.mainMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.findTab.SuspendLayout();
@@ -70,6 +72,7 @@
             this.deleteTab.SuspendLayout();
             this.privateVarsTab.SuspendLayout();
             this.settingsGroup.SuspendLayout();
+            this.defaultsTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -96,13 +99,13 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -117,8 +120,9 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // languageToolStripMenuItem
             // 
@@ -135,14 +139,14 @@
             this.vBToolStripMenuItem.CheckOnClick = true;
             this.vBToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.vBToolStripMenuItem.Name = "vBToolStripMenuItem";
-            this.vBToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.vBToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.vBToolStripMenuItem.Text = "Visual Basic";
             // 
             // cToolStripMenuItem
             // 
             this.cToolStripMenuItem.CheckOnClick = true;
             this.cToolStripMenuItem.Name = "cToolStripMenuItem";
-            this.cToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.cToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cToolStripMenuItem.Text = "C#";
             // 
             // tabControl1
@@ -152,6 +156,7 @@
             this.tabControl1.Controls.Add(this.updateTab);
             this.tabControl1.Controls.Add(this.deleteTab);
             this.tabControl1.Controls.Add(this.privateVarsTab);
+            this.tabControl1.Controls.Add(this.defaultsTab);
             this.tabControl1.Location = new System.Drawing.Point(446, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -392,7 +397,6 @@
             this.passwordText.PasswordChar = '*';
             this.passwordText.Size = new System.Drawing.Size(275, 20);
             this.passwordText.TabIndex = 2;
-            this.passwordText.Text = "gkm@2836";
             // 
             // usernameText
             // 
@@ -400,7 +404,6 @@
             this.usernameText.Name = "usernameText";
             this.usernameText.Size = new System.Drawing.Size(275, 20);
             this.usernameText.TabIndex = 1;
-            this.usernameText.Text = "gkmtest";
             // 
             // serverNameText
             // 
@@ -408,7 +411,29 @@
             this.serverNameText.Name = "serverNameText";
             this.serverNameText.Size = new System.Drawing.Size(275, 20);
             this.serverNameText.TabIndex = 0;
-            this.serverNameText.Text = "fm7ohm9oxy";
+            // 
+            // defaultsTab
+            // 
+            this.defaultsTab.Controls.Add(this.defaultText);
+            this.defaultsTab.Location = new System.Drawing.Point(4, 22);
+            this.defaultsTab.Name = "defaultsTab";
+            this.defaultsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.defaultsTab.Size = new System.Drawing.Size(640, 530);
+            this.defaultsTab.TabIndex = 5;
+            this.defaultsTab.Text = "Default Values";
+            this.defaultsTab.UseVisualStyleBackColor = true;
+            // 
+            // defaultText
+            // 
+            this.defaultText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.defaultText.Location = new System.Drawing.Point(9, 9);
+            this.defaultText.Multiline = true;
+            this.defaultText.Name = "defaultText";
+            this.defaultText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.defaultText.Size = new System.Drawing.Size(623, 513);
+            this.defaultText.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -422,6 +447,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SQL Builder";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -437,6 +463,8 @@
             this.privateVarsTab.PerformLayout();
             this.settingsGroup.ResumeLayout(false);
             this.settingsGroup.PerformLayout();
+            this.defaultsTab.ResumeLayout(false);
+            this.defaultsTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -478,6 +506,8 @@
         private System.Windows.Forms.Button connectBtn;
         private System.Windows.Forms.TabPage findTab;
         private System.Windows.Forms.TextBox findText;
+        private System.Windows.Forms.TabPage defaultsTab;
+        private System.Windows.Forms.TextBox defaultText;
     }
 }
 

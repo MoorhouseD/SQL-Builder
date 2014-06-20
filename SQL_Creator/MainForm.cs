@@ -60,7 +60,14 @@ namespace SQL_Creator
 
         private void PopulateTables()
         {
-            tablesComboBox.Items.AddRange(DatabaseHandler.GetTables().ToArray());
+            try
+            {
+                tablesComboBox.Items.AddRange(DatabaseHandler.GetTables().ToArray());
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Unable to load table. Check the table is correct and try again.", "Table Error", MessageBoxButtons.OK);
+            }
         }
 
         private void buildBtn_Click(object sender, EventArgs e)
@@ -102,7 +109,32 @@ namespace SQL_Creator
 
                 //Make Create
                 insertText.Text = VisualBasic.MakeCreate(tablesComboBox.SelectedItem.ToString(), cols);
+
+                //Make Defaults
+                defaultText.Text = VisualBasic.MakeDefaults(cols);
             }
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings s = new Settings();
+            s.ShowDialog();
+
+            if(s.reloadForm)
+            {
+                LoadSettings();
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            LoadSettings();
+        }
+
+        public void LoadSettings()
+        {
+            serverNameText.Text = Properties.Settings.Default.ServerName;
+            usernameText.Text = Properties.Settings.Default.UserName;
         }
 
         
