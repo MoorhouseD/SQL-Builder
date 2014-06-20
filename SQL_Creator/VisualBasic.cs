@@ -125,7 +125,7 @@ namespace SQL_Creator
         public static string MakeConnectionString(string settingsStringName)
         {
             if (settingsStringName != null && settingsStringName.Trim().Length > 0)
-                return "Private sConnectionString = My.Settings." + settingsStringName + " `Get ConnectionString from My.Settings";
+                return "Private sConnectionString = My.Settings." + settingsStringName + " 'Get ConnectionString from My.Settings";
             else
                 return "";
         }
