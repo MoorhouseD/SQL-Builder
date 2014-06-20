@@ -89,9 +89,9 @@ namespace SQL_Creator
             defaults += "End Sub" + nl;
 
             defaults += "Public Sub New()" + nl + nl +
-                        tab + "` This call is required by the Windows Form Designer." + nl +
+                        tab + "' This call is required by the Windows Form Designer." + nl +
                         tab + "InitializeComponent()" + nl + nl +
-                        tab + "` Add any initialization after the InitializeComponent() call." + nl +
+                        tab + "' Add any initialization after the InitializeComponent() call." + nl +
                         tab + "PopulateDefault()" + nl +
                         "End Sub";
 
@@ -292,7 +292,7 @@ namespace SQL_Creator
                             tab + "Dim objConnection As New SqlConnection(sConnectionString)" + nl +
                             tab + "objConnection.Open()" + nl +
                             tab + "Dim objCommand As New SqlCommand(\"DELETE FROM " + table + " WHERE " + name + " = @" + name + "\",objConnection)" + nl +
-                            tab + "objCommand.Parameters.AddWithValue('@" + name + "', " + prefixName + ")" + nl +
+                            tab + "objCommand.Parameters.AddWithValue(\"@" + name + "\", " + prefixName + ")" + nl +
                             tab + "objCommand.ExecuteNonQuery()" + nl +
                             tab + "objConnection.Close()" + nl +
                             "End Sub";
