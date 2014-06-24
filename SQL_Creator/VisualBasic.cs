@@ -261,7 +261,11 @@ namespace SQL_Creator
 
                 parameterHolder += tab + "objCommand.Parameters.AddWithValue(\"@" + capitalisedName + "\", " + prefix + capitalisedName + ")" + nl;
 
-                if (i != cols.Count() - 1)
+                if (i == 0)
+                {
+
+                }
+                else if (i != cols.Count() - 1)
                     update += capitalisedName + " = @" + capitalisedName + ", ";
                 else
                     update += capitalisedName + " = @" + capitalisedName;
